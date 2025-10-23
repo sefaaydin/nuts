@@ -1,93 +1,91 @@
 // ===================================
-// Navigation Menu Toggle
+// PROFESSIONAL INTERACTIONS & ANIMATIONS
 // ===================================
 
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
-const navLinks = document.querySelectorAll('.nav-link');
-
-// Toggle mobile menu
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
-
-// Close menu when clicking on a link
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    });
-});
+'use strict';
 
 // ===================================
-// Header Scroll Effect
+// Navigation
 // ===================================
 
-const header = document.getElementById('header');
-let lastScrollY = window.scrollY;
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 100) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
+class Navigation {
+    constructor() {
+        this.header = document.getElementById('header');
+        this.hamburger = document.getElementById('hamburger');
+        this.navMenu = document.getElementById('navMenu');
+        this.navLinks = document.querySelectorAll('.nav-link');
+        this.init();
     }
-});
 
-// ===================================
-// Active Navigation Link on Scroll
-// ===================================
+    init() {
+        this.hamburger?.addEventListener('click', () => this.toggleMenu());
+        this.navLinks.forEach(link => {
+            link.addEventListener('click', () => this.closeMenu());
+        });
+        window.addEventListener('scroll', () => this.handleScroll());
+        this.updateActiveLink();
+    }
 
-const sections = document.querySelectorAll('section[id]');
+    toggleMenu() {
+        this.hamburger.classList.toggle('active');
+        this.navMenu.classList.toggle('active');
+        document.body.style.overflow = this.navMenu.classList.contains('active') ? 'hidden' : '';
+    }
 
-function updateActiveLink() {
-    const scrollY = window.scrollY;
-    
-    sections.forEach(section => {
-        const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
-        const sectionId = section.getAttribute('id');
-        const correspondingLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
-        
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navLinks.forEach(link => link.classList.remove('active'));
-            correspondingLink?.classList.add('active');
+    closeMenu() {
+        this.hamburger?.classList.remove('active');
+        this.navMenu?.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    handleScroll() {
+        if (window.scrollY > 100) {
+            this.header?.classList.add('scrolled');
+        } else {
+            this.header?.classList.remove('scrolled');
         }
-    });
+        this.updateActiveLink();
+    }
+
+    updateActiveLink() {
+        const scrollY = window.scrollY;
+        const sections = document.querySelectorAll('section[id]');
+        
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 150;
+            const sectionId = section.getAttribute('id');
+            const correspondingLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+            
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                this.navLinks.forEach(link => link.classList.remove('active'));
+                correspondingLink?.classList.add('active');
+            }
+        });
+    }
 }
 
-window.addEventListener('scroll', updateActiveLink);
-
 // ===================================
-// Scroll Animations (Intersection Observer)
+// Smooth Scroll
 // ===================================
 
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+class SmoothScroll {
+    constructor() {
+        this.init();
+    }
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
+    init() {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', (e) => this.handleClick(e));
+        });
+    }
 
-// Observe all animated elements
-const animatedElements = document.querySelectorAll('.fade-up, .slide-in-left, .slide-in-right');
-animatedElements.forEach(element => observer.observe(element));
-
-// ===================================
-// Smooth Scroll for Navigation Links
-// ===================================
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    handleClick(e) {
+        const href = e.currentTarget.getAttribute('href');
+        if (href === '#') return;
+        
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const target = document.querySelector(href);
         
         if (target) {
             const headerOffset = 80;
@@ -99,329 +97,488 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth'
             });
         }
-    });
-});
-
-// ===================================
-// Product Card Hover Effect
-// ===================================
-
-const productCards = document.querySelectorAll('.product-card');
-
-productCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// ===================================
-// Gallery Image Modal (Optional Enhancement)
-// ===================================
-
-const galleryItems = document.querySelectorAll('.gallery-item');
-
-galleryItems.forEach(item => {
-    item.addEventListener('click', function() {
-        const imgSrc = this.querySelector('img').src;
-        createModal(imgSrc);
-    });
-});
-
-function createModal(imgSrc) {
-    const modal = document.createElement('div');
-    modal.className = 'modal-overlay';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <img src="${imgSrc}" alt="Gallery Image">
-            <button class="modal-close">&times;</button>
-        </div>
-    `;
-    
-    document.body.appendChild(modal);
-    document.body.style.overflow = 'hidden';
-    
-    // Add styles dynamically
-    const style = document.createElement('style');
-    style.textContent = `
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            animation: fadeIn 0.3s ease-out;
-        }
-        
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90vh;
-            animation: zoomIn 0.3s ease-out;
-        }
-        
-        .modal-content img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 10px;
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: -40px;
-            right: -40px;
-            background: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .modal-close:hover {
-            transform: rotate(90deg);
-            background: #E87722;
-            color: white;
-        }
-        
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .modal-close {
-                top: 10px;
-                right: 10px;
-            }
-        }
-    `;
-    
-    if (!document.querySelector('.modal-styles')) {
-        style.className = 'modal-styles';
-        document.head.appendChild(style);
     }
-    
-    // Close modal
-    const closeBtn = modal.querySelector('.modal-close');
-    closeBtn.addEventListener('click', () => {
-        modal.style.animation = 'fadeOut 0.3s ease-out';
+}
+
+// ===================================
+// Intersection Observer for Animations
+// ===================================
+
+class ScrollAnimations {
+    constructor() {
+        this.options = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        this.init();
+    }
+
+    init() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Unobserve after animation for performance
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, this.options);
+
+        const animatedElements = document.querySelectorAll('.fade-up, .slide-in-left, .slide-in-right');
+        animatedElements.forEach(element => observer.observe(element));
+    }
+}
+
+// ===================================
+// Product Cards Interactions
+// ===================================
+
+class ProductCards {
+    constructor() {
+        this.cards = document.querySelectorAll('.product-card');
+        this.init();
+    }
+
+    init() {
+        this.cards.forEach(card => {
+            card.addEventListener('mouseenter', () => this.handleMouseEnter(card));
+            card.addEventListener('mouseleave', () => this.handleMouseLeave(card));
+        });
+    }
+
+    handleMouseEnter(card) {
+        // Add subtle tilt effect
+        card.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+    }
+
+    handleMouseLeave(card) {
+        card.style.transform = '';
+    }
+}
+
+// ===================================
+// Gallery Modal
+// ===================================
+
+class GalleryModal {
+    constructor() {
+        this.galleryItems = document.querySelectorAll('.gallery-item');
+        this.init();
+    }
+
+    init() {
+        this.galleryItems.forEach(item => {
+            const btn = item.querySelector('.gallery-btn');
+            btn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const imgSrc = item.querySelector('img').src;
+                this.createModal(imgSrc);
+            });
+        });
+    }
+
+    createModal(imgSrc) {
+        const modal = document.createElement('div');
+        modal.className = 'gallery-modal';
+        modal.innerHTML = `
+            <div class="modal-backdrop"></div>
+            <div class="modal-container">
+                <button class="modal-close" aria-label="Close">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <img src="${imgSrc}" alt="Gallery Image">
+                <button class="modal-nav modal-prev" aria-label="Previous">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button class="modal-nav modal-next" aria-label="Next">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+        document.body.style.overflow = 'hidden';
+        
+        // Add styles
+        this.addModalStyles();
+        
+        // Animate in
+        requestAnimationFrame(() => {
+            modal.classList.add('active');
+        });
+
+        // Close handlers
+        const closeBtn = modal.querySelector('.modal-close');
+        const backdrop = modal.querySelector('.modal-backdrop');
+        
+        closeBtn.addEventListener('click', () => this.closeModal(modal));
+        backdrop.addEventListener('click', () => this.closeModal(modal));
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') this.closeModal(modal);
+        });
+    }
+
+    closeModal(modal) {
+        modal.classList.remove('active');
         setTimeout(() => {
             modal.remove();
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = '';
         }, 300);
-    });
-    
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.animation = 'fadeOut 0.3s ease-out';
-            setTimeout(() => {
-                modal.remove();
-                document.body.style.overflow = 'auto';
-            }, 300);
-        }
-    });
-}
-
-// Add fadeOut animation
-const fadeOutStyle = document.createElement('style');
-fadeOutStyle.textContent = `
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-        }
-        to {
-            opacity: 0;
-        }
     }
-`;
-document.head.appendChild(fadeOutStyle);
 
-// ===================================
-// Contact Form Submission
-// ===================================
-
-const contactForm = document.querySelector('.contact-form form');
-
-contactForm?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form data
-    const formData = new FormData(this);
-    
-    // Show success message
-    showNotification('Thank you for your message! We will get back to you soon.', 'success');
-    
-    // Reset form
-    this.reset();
-});
-
-function showNotification(message, type = 'success') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-    
-    const style = document.createElement('style');
-    style.textContent = `
-        .notification {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            padding: 20px 30px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            z-index: 10000;
-            animation: slideInRight 0.5s ease-out;
-            max-width: 400px;
-        }
+    addModalStyles() {
+        if (document.querySelector('#gallery-modal-styles')) return;
         
-        .notification-success {
-            border-left: 4px solid #4CAF50;
-        }
-        
-        .notification-error {
-            border-left: 4px solid #f44336;
-        }
-        
-        @keyframes slideInRight {
-            from {
-                transform: translateX(400px);
+        const style = document.createElement('style');
+        style.id = 'gallery-modal-styles';
+        style.textContent = `
+            .gallery-modal {
+                position: fixed;
+                inset: 0;
+                z-index: 9999;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 opacity: 0;
+                transition: opacity 0.3s ease;
             }
-            to {
-                transform: translateX(0);
+            
+            .gallery-modal.active {
                 opacity: 1;
             }
-        }
-        
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
+            
+            .modal-backdrop {
+                position: absolute;
+                inset: 0;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
             }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
+            
+            .modal-container {
+                position: relative;
+                max-width: 90vw;
+                max-height: 90vh;
+                z-index: 1;
+                animation: modalZoom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
-        }
-    `;
-    
-    if (!document.querySelector('.notification-styles')) {
-        style.className = 'notification-styles';
+            
+            .modal-container img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                border-radius: 12px;
+            }
+            
+            .modal-close {
+                position: absolute;
+                top: -50px;
+                right: 0;
+                width: 40px;
+                height: 40px;
+                background: white;
+                border: none;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+            
+            .modal-close:hover {
+                transform: rotate(90deg);
+                background: #E87722;
+            }
+            
+            .modal-close:hover svg {
+                stroke: white;
+            }
+            
+            .modal-nav {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 50px;
+                height: 50px;
+                background: rgba(255, 255, 255, 0.9);
+                border: none;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+            
+            .modal-prev {
+                left: -70px;
+            }
+            
+            .modal-next {
+                right: -70px;
+            }
+            
+            .modal-nav:hover {
+                background: white;
+                transform: translateY(-50%) scale(1.1);
+            }
+            
+            @keyframes modalZoom {
+                from {
+                    transform: scale(0.8);
+                }
+                to {
+                    transform: scale(1);
+                }
+            }
+            
+            @media (max-width: 768px) {
+                .modal-close {
+                    top: 10px;
+                    right: 10px;
+                }
+                
+                .modal-nav {
+                    display: none;
+                }
+            }
+        `;
         document.head.appendChild(style);
     }
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.5s ease-out';
-        setTimeout(() => notification.remove(), 500);
-    }, 3000);
 }
 
 // ===================================
-// Parallax Effect for Hero Section
+// Form Handler
 // ===================================
 
-window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const hero = document.querySelector('.hero-image');
-    
-    if (hero) {
-        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+class FormHandler {
+    constructor() {
+        this.contactForm = document.querySelector('.contact-form');
+        this.newsletterForm = document.querySelector('.newsletter-form');
+        this.init();
     }
-});
 
-// ===================================
-// Loading Animation
-// ===================================
+    init() {
+        this.contactForm?.addEventListener('submit', (e) => this.handleContactSubmit(e));
+        this.newsletterForm?.addEventListener('submit', (e) => this.handleNewsletterSubmit(e));
+    }
 
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.5s ease-out';
-        document.body.style.opacity = '1';
-    }, 100);
-});
+    handleContactSubmit(e) {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        
+        // Show loading state
+        const submitBtn = e.target.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span>Sending...</span>';
+        submitBtn.disabled = true;
+        
+        // Simulate API call
+        setTimeout(() => {
+            this.showNotification('Thank you! Your message has been sent successfully.', 'success');
+            e.target.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 1500);
+    }
 
-// ===================================
-// Performance: Lazy Loading Images
-// ===================================
+    handleNewsletterSubmit(e) {
+        e.preventDefault();
+        const email = e.target.querySelector('input[type="email"]').value;
+        
+        if (email) {
+            this.showNotification('Successfully subscribed to newsletter!', 'success');
+            e.target.reset();
+        }
+    }
 
-if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src || img.src;
-                img.classList.add('loaded');
-                observer.unobserve(img);
-            }
+    showNotification(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <div class="notification-icon">
+                ${type === 'success' ? '✓' : '✕'}
+            </div>
+            <p>${message}</p>
+        `;
+        
+        document.body.appendChild(notification);
+        this.addNotificationStyles();
+        
+        // Animate in
+        requestAnimationFrame(() => {
+            notification.classList.add('show');
         });
-    });
-    
-    const images = document.querySelectorAll('img');
-    images.forEach(img => imageObserver.observe(img));
+        
+        // Auto remove
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => notification.remove(), 300);
+        }, 4000);
+    }
+
+    addNotificationStyles() {
+        if (document.querySelector('#notification-styles')) return;
+        
+        const style = document.createElement('style');
+        style.id = 'notification-styles';
+        style.textContent = `
+            .notification {
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 16px 24px;
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+                z-index: 10000;
+                transform: translateX(400px);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                max-width: 400px;
+            }
+            
+            .notification.show {
+                transform: translateX(0);
+            }
+            
+            .notification-icon {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                flex-shrink: 0;
+            }
+            
+            .notification-success .notification-icon {
+                background: #4CAF50;
+                color: white;
+            }
+            
+            .notification-error .notification-icon {
+                background: #f44336;
+                color: white;
+            }
+            
+            .notification p {
+                margin: 0;
+                color: #2C2416;
+                font-weight: 500;
+            }
+            
+            @media (max-width: 640px) {
+                .notification {
+                    right: 10px;
+                    left: 10px;
+                    max-width: none;
+                    transform: translateY(-100px);
+                }
+                
+                .notification.show {
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 }
 
 // ===================================
-// Add Ripple Effect to Buttons
+// Parallax Effects
 // ===================================
 
-const buttons = document.querySelectorAll('.btn');
+class ParallaxEffects {
+    constructor() {
+        this.init();
+    }
 
-buttons.forEach(button => {
-    button.addEventListener('click', function(e) {
-        const ripple = document.createElement('span');
-        ripple.className = 'ripple';
+    init() {
+        window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
+    }
+
+    handleScroll() {
+        const scrolled = window.pageYOffset;
         
-        const rect = this.getBoundingClientRect();
+        // Hero parallax
+        const heroImage = document.querySelector('.hero-image-wrapper');
+        if (heroImage) {
+            const speed = 0.3;
+            heroImage.style.transform = `translateY(${scrolled * speed}px)`;
+        }
+
+        // Floating cards
+        const floatingCards = document.querySelectorAll('.floating-card');
+        floatingCards.forEach((card, index) => {
+            const speed = 0.1 + (index * 0.05);
+            card.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    }
+}
+
+// ===================================
+// Button Ripple Effect
+// ===================================
+
+class RippleEffect {
+    constructor() {
+        this.buttons = document.querySelectorAll('.btn');
+        this.init();
+    }
+
+    init() {
+        this.buttons.forEach(button => {
+            button.addEventListener('click', (e) => this.createRipple(e));
+        });
+    }
+
+    createRipple(e) {
+        const button = e.currentTarget;
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple-effect';
+        
+        const rect = button.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
         const x = e.clientX - rect.left - size / 2;
         const y = e.clientY - rect.top - size / 2;
         
         ripple.style.cssText = `
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.6);
             width: ${size}px;
             height: ${size}px;
             left: ${x}px;
             top: ${y}px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
             pointer-events: none;
-            animation: rippleEffect 0.6s ease-out;
+            animation: ripple 0.6s ease-out;
         `;
         
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
+        button.style.position = 'relative';
+        button.style.overflow = 'hidden';
+        button.appendChild(ripple);
         
         setTimeout(() => ripple.remove(), 600);
-    });
-});
+    }
+}
 
+// Add ripple animation
 const rippleStyle = document.createElement('style');
 rippleStyle.textContent = `
-    @keyframes rippleEffect {
+    @keyframes ripple {
         from {
             transform: scale(0);
             opacity: 1;
@@ -435,8 +592,194 @@ rippleStyle.textContent = `
 document.head.appendChild(rippleStyle);
 
 // ===================================
-// Console Welcome Message
+// Cursor Effect (Optional Premium Feature)
 // ===================================
 
-console.log('%c🌰 Mega Kuruyemiş ', 'font-size: 20px; font-weight: bold; color: #8B4513;');
-console.log('%cWelcome to our premium nuts & dried fruits website!', 'font-size: 14px; color: #E87722;');
+class CursorEffect {
+    constructor() {
+        this.cursor = document.createElement('div');
+        this.cursor.className = 'custom-cursor';
+        document.body.appendChild(this.cursor);
+        this.init();
+    }
+
+    init() {
+        document.addEventListener('mousemove', (e) => {
+            this.cursor.style.left = e.clientX + 'px';
+            this.cursor.style.top = e.clientY + 'px';
+        });
+
+        // Add hover effect for interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .product-card, .gallery-item');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => this.cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => this.cursor.classList.remove('hover'));
+        });
+
+        this.addCursorStyles();
+    }
+
+    addCursorStyles() {
+        const style = document.createElement('style');
+        style.textContent = `
+            .custom-cursor {
+                width: 20px;
+                height: 20px;
+                border: 2px solid #8B4513;
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 10001;
+                transform: translate(-50%, -50%);
+                transition: all 0.15s ease;
+                mix-blend-mode: difference;
+                display: none;
+            }
+            
+            .custom-cursor.hover {
+                width: 40px;
+                height: 40px;
+                background: rgba(232, 119, 34, 0.2);
+            }
+            
+            @media (min-width: 1024px) {
+                .custom-cursor {
+                    display: block;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// ===================================
+// Counter Animation
+// ===================================
+
+class CounterAnimation {
+    constructor() {
+        this.counters = document.querySelectorAll('.stat-item h3');
+        this.init();
+    }
+
+    init() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animateCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        this.counters.forEach(counter => observer.observe(counter));
+    }
+
+    animateCounter(element) {
+        const target = element.textContent;
+        const number = parseInt(target.replace(/\D/g, ''));
+        const suffix = target.replace(/[\d\s]/g, '');
+        const duration = 2000;
+        const increment = number / (duration / 16);
+        let current = 0;
+
+        const updateCounter = () => {
+            current += increment;
+            if (current < number) {
+                element.textContent = Math.floor(current) + suffix;
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = number + suffix;
+            }
+        };
+
+        updateCounter();
+    }
+}
+
+// ===================================
+// Page Loading Animation
+// ===================================
+
+class PageLoader {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            
+            requestAnimationFrame(() => {
+                document.body.style.transition = 'opacity 0.5s ease-out';
+                document.body.style.opacity = '1';
+            });
+        });
+    }
+}
+
+// ===================================
+// Initialize All Components
+// ===================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    new Navigation();
+    new SmoothScroll();
+    new ScrollAnimations();
+    new ProductCards();
+    new GalleryModal();
+    new FormHandler();
+    new ParallaxEffects();
+    new RippleEffect();
+    new CounterAnimation();
+    new PageLoader();
+    
+    // Optional: Enable custom cursor on desktop only
+    if (window.innerWidth >= 1024) {
+        new CursorEffect();
+    }
+    
+    // Console branding
+    console.log(
+        '%c🌰 Mega Kuruyemiş',
+        'font-size: 24px; font-weight: bold; color: #8B4513; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);'
+    );
+    console.log(
+        '%cPremium Turkish Nuts & Dried Fruits',
+        'font-size: 14px; color: #E87722; font-weight: 500;'
+    );
+    console.log(
+        '%cWebsite crafted with ❤️ and modern technologies',
+        'font-size: 12px; color: #6B6B6B;'
+    );
+});
+
+// ===================================
+// Performance Monitoring (Optional)
+// ===================================
+
+if ('PerformanceObserver' in window) {
+    const observer = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+            if (entry.entryType === 'largest-contentful-paint') {
+                console.log('LCP:', entry.renderTime || entry.loadTime);
+            }
+        }
+    });
+    observer.observe({ entryTypes: ['largest-contentful-paint'] });
+}
+
+// ===================================
+// Export for module usage (if needed)
+// ===================================
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        Navigation,
+        SmoothScroll,
+        ScrollAnimations,
+        ProductCards,
+        GalleryModal,
+        FormHandler
+    };
+}
