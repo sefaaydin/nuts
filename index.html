@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Üyelik Başvurusu</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f3e9df;
+        --card-bg: rgba(255, 255, 255, 0.82);
+        --accent: #b2865b;
+        --accent-dark: #8f6a45;
+        --border: #d8c6b8;
+        --text: #4b3e34;
+        --muted: #8b7a6f;
+      }
+
+      body {
+        font-family: "Inter", system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .page-bg {
+        min-height: 100vh;
+        background-color: var(--bg);
+        background-image: radial-gradient(
+            circle at top,
+            rgba(255, 255, 255, 0.7),
+            rgba(243, 233, 223, 0.9)
+          ),
+          linear-gradient(180deg, rgba(230, 214, 201, 0.6), rgba(245, 236, 230, 0.95)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.12) 0,
+            rgba(255, 255, 255, 0.12) 2px,
+            rgba(0, 0, 0, 0) 2px,
+            rgba(0, 0, 0, 0) 6px
+          );
+        background-size: auto, auto, 140px 140px;
+      }
+
+      .heading {
+        font-family: "Cormorant Garamond", "Times New Roman", serif;
+        letter-spacing: 0.2px;
+      }
+
+      .subtitle {
+        color: var(--muted);
+        max-width: 620px;
+      }
+
+      .form-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        box-shadow: 0 18px 40px rgba(70, 45, 24, 0.18);
+        backdrop-filter: blur(6px);
+      }
+
+      .section-title {
+        font-family: "Cormorant Garamond", "Times New Roman", serif;
+        font-size: 1.5rem;
+        margin: 0;
+      }
+
+      .section-divider {
+        height: 1px;
+        background: var(--border);
+      }
+
+      .form-control,
+      .form-select,
+      .input-group-text {
+        border-color: var(--border);
+        background-color: #fdf8f5;
+        color: var(--text);
+      }
+
+      .form-control::placeholder {
+        color: #b0a198;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 0.2rem rgba(164, 122, 73, 0.2);
+      }
+
+      .input-group-text {
+        color: var(--accent-dark);
+      }
+
+      .btn-apply {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(180deg, #c49763, var(--accent-dark));
+        color: #fff;
+        border: none;
+        box-shadow: 0 10px 20px rgba(138, 101, 62, 0.35);
+      }
+
+      .btn-apply::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        height: 55%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+        pointer-events: none;
+      }
+
+      .btn-apply:hover,
+      .btn-apply:focus {
+        background: linear-gradient(180deg, #c79863, #9a7046);
+        color: #fff;
+      }
+
+      .form-check-label a {
+        color: var(--accent-dark);
+        text-decoration: none;
+      }
+
+      .form-check-label a:hover {
+        text-decoration: underline;
+      }
+
+      .social-icons i {
+        font-size: 1.4rem;
+        color: var(--accent-dark);
+      }
+
+      .secure-note {
+        font-size: 0.95rem;
+        color: var(--muted);
+        letter-spacing: 0.4px;
+      }
+
+      .required-star {
+        color: var(--accent-dark);
+      }
+
+      .site-footer {
+        margin-top: 3.5rem;
+      }
+
+      .footer-panel {
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 16px 35px rgba(70, 45, 24, 0.12);
+      }
+
+      .footer-brand {
+        font-size: clamp(2rem, 4vw, 2.6rem);
+        color: var(--accent-dark);
+        letter-spacing: 4px;
+      }
+
+      .footer-brand-sub {
+        font-family: "Cormorant Garamond", "Times New Roman", serif;
+        font-size: 1.2rem;
+        color: var(--accent-dark);
+        letter-spacing: 2px;
+      }
+
+      .footer-tagline {
+        color: var(--muted);
+        margin: 0.75rem auto 0;
+        max-width: 520px;
+      }
+
+      .footer-heading {
+        font-family: "Cormorant Garamond", "Times New Roman", serif;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .footer-list {
+        list-style: disc;
+        padding-left: 1.1rem;
+        margin: 0;
+        color: var(--text);
+      }
+
+      .footer-list li + li {
+        margin-top: 0.55rem;
+      }
+
+      .footer-divider {
+        height: 1px;
+        background: var(--border);
+      }
+
+      .footer-column {
+        position: relative;
+      }
+
+      .footer-column + .footer-column {
+        border-left: 1px solid var(--border);
+      }
+
+      .footer-cta {
+        background: #fdf8f5;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+        text-align: center;
+        box-shadow: 0 12px 20px rgba(70, 45, 24, 0.1);
+      }
+
+      .btn-whatsapp {
+        background: #f2e6db;
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .btn-whatsapp span {
+        display: block;
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .btn-whatsapp i {
+        font-size: 1.6rem;
+        color: #3c8c5c;
+      }
+
+      .footer-handle {
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .footer-handle::before,
+      .footer-handle::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .footer-handle span {
+        padding: 0 0.75rem;
+      }
+
+      .footer-social a {
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-dark);
+        background: #fdf8f5;
+      }
+
+      .footer-social i {
+        font-size: 1.2rem;
+      }
+
+      .footer-copy {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      @media (max-width: 991px) {
+        .form-card {
+          padding: 1.5rem !important;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .footer-column + .footer-column {
+          border-left: 0;
+          border-top: 1px solid var(--border);
+          padding-top: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-bg py-5">
+      <main class="container">
+        <div class="text-center mb-4">
+          <h1 class="heading display-5 mb-2">Üyelik Başvurusu</h1>
+          <p class="subtitle mx-auto">
+            Sadece firmalar üye olabilir. Üyelik başvurunuz tarafımızca onaylandıktan
+            sonra sipariş verebileceksiniz.
+          </p>
+        </div>
+
+        <div class="form-card p-4 p-lg-5">
+          <form class="needs-validation" novalidate>
+            <div class="row g-4">
+              <div class="col-12 col-lg-6">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <h2 class="section-title">Firma Bilgileri</h2>
+                  <div class="section-divider flex-grow-1"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="companyName">
+                    Firma İsmi <span class="required-star">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="companyName"
+                    placeholder="Firma ismi"
+                    required
+                  />
+                  <div class="invalid-feedback">Firma ismi zorunludur.</div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="companyEmail">
+                    Kurumsal E-Posta <span class="required-star">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="companyEmail"
+                      placeholder="E-posta adresiniz"
+                      required
+                    />
+                    <div class="invalid-feedback">Geçerli bir e-posta girin.</div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="companyPhone">
+                    Telefon Numarası <span class="required-star">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="companyPhone"
+                      placeholder="+90 5XX XXX XX XX"
+                      inputmode="numeric"
+                      data-phone-mask
+                      required
+                    />
+                    <div class="invalid-feedback">Telefon numarası zorunludur.</div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="companyAddress">
+                    Firma Adresi <span class="required-star">*</span>
+                  </label>
+                  <textarea
+                    class="form-control"
+                    id="companyAddress"
+                    rows="3"
+                    placeholder="Açık adresiniz"
+                    required
+                  ></textarea>
+                  <div class="invalid-feedback">Adres alanı zorunludur.</div>
+                </div>
+
+                <div class="row g-3">
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="companyCity">Şehir</label>
+                    <select class="form-select" id="companyCity">
+                      <option selected>Şehir seçin</option>
+                      <option>İstanbul</option>
+                      <option>Ankara</option>
+                      <option>İzmir</option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <label class="form-label" for="companyCountry">Ülke</label>
+                    <select class="form-select" id="companyCountry">
+                      <option selected>Ülke seçin</option>
+                      <option>Türkiye</option>
+                      <option>Almanya</option>
+                      <option>İngiltere</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-6">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <h2 class="section-title">Firma Sosyal Medya</h2>
+                  <div class="section-divider flex-grow-1"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="instagram">Instagram</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-instagram"></i></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="instagram"
+                      placeholder="instagram.com/marka"
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="pinterest">Pinterest</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-pinterest"></i></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="pinterest"
+                      placeholder="pinterest.com"
+                    />
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label" for="socialPhone">Sosyal İletişim</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="socialPhone"
+                      placeholder="+90 5XX XXX XX XX"
+                      inputmode="numeric"
+                      data-phone-mask
+                    />
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <h2 class="section-title">Bireysel Bilgiler</h2>
+                  <div class="section-divider flex-grow-1"></div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="contactName">
+                    Yetkili İsmi <span class="required-star">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="contactName"
+                      placeholder="Yetkili ismi"
+                      required
+                    />
+                    <div class="invalid-feedback">Yetkili ismi zorunludur.</div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label" for="contactSurname">
+                    Yetkili Soyismi <span class="required-star">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-person-vcard"></i></span>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="contactSurname"
+                      placeholder="Yetkili soyismi"
+                      required
+                    />
+                    <div class="invalid-feedback">Yetkili soyismi zorunludur.</div>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label" for="contactPhone">
+                    Cep Telefonu <span class="required-star">*</span>
+                  </label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-whatsapp"></i></span>
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="contactPhone"
+                      placeholder="+90 5XX XXX XX XX"
+                      inputmode="numeric"
+                      data-phone-mask
+                      required
+                    />
+                    <div class="invalid-feedback">Cep telefonu zorunludur.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 d-flex flex-column align-items-center gap-3">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="privacyCheck"
+                  required
+                />
+                <label class="form-check-label" for="privacyCheck">
+                  Gizlilik Politikası'nı okudum ve kabul ediyorum.
+                </label>
+                <div class="invalid-feedback">
+                  Gizlilik politikasını onaylamalısınız.
+                </div>
+              </div>
+              <button type="submit" class="btn btn-apply px-5 py-2">
+                Başvuruyu Tamamla
+              </button>
+            </div>
+          </form>
+
+        </div>
+
+        <footer class="site-footer">
+          <div class="footer-panel px-3 px-lg-4 py-4">
+            <div class="text-center">
+              <h2 class="heading footer-brand mb-1">JEGLIDE</h2>
+              <div class="footer-brand-sub text-uppercase">COUTURE</div>
+              <p class="footer-tagline">
+                Özel geceler için tasarlanan zamansız silüetler.
+              </p>
+            </div>
+
+            <div class="footer-divider my-4"></div>
+
+            <div class="row g-4 align-items-start">
+              <div class="col-12 col-md-4 footer-column">
+                <h3 class="footer-heading">Koleksiyonlar</h3>
+                <ul class="footer-list">
+                  <li>Davet &amp; Gece</li>
+                  <li>Mezuniyet</li>
+                  <li>Nikah &amp; After Party</li>
+                  <li>Büyük Beden</li>
+                  <li>Yeni Gelenler</li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-4 footer-column">
+                <h3 class="footer-heading">Müşteri Hizmetleri</h3>
+                <ul class="footer-list">
+                  <li>Sipariş Takibi</li>
+                  <li>Kargo &amp; Teslimat</li>
+                  <li>İade &amp; Değişim</li>
+                  <li>Beden Rehberi</li>
+                  <li>S.S.S.</li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-4 footer-column">
+                <div class="footer-cta">
+                  <a href="#" class="btn-whatsapp w-100 text-decoration-none">
+                    <i class="bi bi-whatsapp"></i>
+                    <div>
+                      WhatsApp ile
+                      <span>Stil Danışmanlığı</span>
+                    </div>
+                  </a>
+                </div>
+                <div class="footer-handle d-flex align-items-center gap-2 my-3">
+                  <span>@jeglidecouture</span>
+                </div>
+                <div class="footer-social d-flex justify-content-center gap-3">
+                  <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                  <a href="#" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+                  <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer-divider my-4"></div>
+
+            <div class="text-center secure-note">
+              <i class="bi bi-shield-lock me-2"></i>
+              GÜVENLİ ALIŞVERİŞ
+              <strong>VISA</strong>
+            </div>
+            <div class="text-center footer-copy mt-3">
+              &copy; Jeglide Couture - 2026
+              <br />
+              Tüm hakları saklıdır.
+            </div>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const formatPhoneValue = (digits) => {
+        const trimmedDigits = digits.replace(/^90/, "").slice(0, 10);
+        const parts = [];
+
+        if (trimmedDigits.length > 0) {
+          parts.push(trimmedDigits.slice(0, 3));
+        }
+        if (trimmedDigits.length > 3) {
+          parts.push(trimmedDigits.slice(3, 6));
+        }
+        if (trimmedDigits.length > 6) {
+          parts.push(trimmedDigits.slice(6, 8));
+        }
+        if (trimmedDigits.length > 8) {
+          parts.push(trimmedDigits.slice(8, 10));
+        }
+
+        return parts.length ? `+90 ${parts.join(" ")}` : "";
+      };
+
+      const attachPhoneMask = () => {
+        document.querySelectorAll("[data-phone-mask]").forEach((input) => {
+          input.addEventListener("input", (event) => {
+            const digits = event.target.value.replace(/\D/g, "");
+            event.target.value = formatPhoneValue(digits);
+          });
+        });
+      };
+
+      const attachFormValidation = () => {
+        document.querySelectorAll(".needs-validation").forEach((form) => {
+          form.addEventListener("submit", (event) => {
+            if (!form.checkValidity()) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add("was-validated");
+          });
+        });
+      };
+
+      attachPhoneMask();
+      attachFormValidation();
+    </script>
+  </body>
+</html>
