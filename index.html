@@ -21,13 +21,13 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #f5ece6;
-        --card-bg: rgba(255, 255, 255, 0.78);
-        --accent: #a47a49;
-        --accent-dark: #8a653e;
-        --border: #d9c7bc;
-        --text: #4a3d33;
-        --muted: #7c6b61;
+        --bg: #f3e9df;
+        --card-bg: rgba(255, 255, 255, 0.82);
+        --accent: #b2865b;
+        --accent-dark: #8f6a45;
+        --border: #d8c6b8;
+        --text: #4b3e34;
+        --muted: #8b7a6f;
       }
 
       body {
@@ -38,12 +38,21 @@
 
       .page-bg {
         min-height: 100vh;
+        background-color: var(--bg);
         background-image: radial-gradient(
             circle at top,
-            rgba(255, 255, 255, 0.65),
-            rgba(245, 236, 230, 0.85)
+            rgba(255, 255, 255, 0.7),
+            rgba(243, 233, 223, 0.9)
           ),
-          linear-gradient(180deg, rgba(235, 220, 210, 0.6), rgba(245, 236, 230, 0.95));
+          linear-gradient(180deg, rgba(230, 214, 201, 0.6), rgba(245, 236, 230, 0.95)),
+          repeating-linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.12) 0,
+            rgba(255, 255, 255, 0.12) 2px,
+            rgba(0, 0, 0, 0) 2px,
+            rgba(0, 0, 0, 0) 6px
+          );
+        background-size: auto, auto, 140px 140px;
       }
 
       .heading {
@@ -98,10 +107,21 @@
       }
 
       .btn-apply {
-        background: linear-gradient(180deg, #b88a57, var(--accent-dark));
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(180deg, #c49763, var(--accent-dark));
         color: #fff;
         border: none;
         box-shadow: 0 10px 20px rgba(138, 101, 62, 0.35);
+      }
+
+      .btn-apply::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        height: 55%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+        pointer-events: none;
       }
 
       .btn-apply:hover,
