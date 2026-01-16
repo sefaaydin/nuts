@@ -154,9 +154,150 @@
         color: var(--accent-dark);
       }
 
+      .site-footer {
+        margin-top: 3.5rem;
+      }
+
+      .footer-panel {
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.72);
+        box-shadow: 0 16px 35px rgba(70, 45, 24, 0.12);
+      }
+
+      .footer-brand {
+        font-size: clamp(2rem, 4vw, 2.6rem);
+        color: var(--accent-dark);
+        letter-spacing: 4px;
+      }
+
+      .footer-brand-sub {
+        font-family: "Cormorant Garamond", "Times New Roman", serif;
+        font-size: 1.2rem;
+        color: var(--accent-dark);
+        letter-spacing: 2px;
+      }
+
+      .footer-tagline {
+        color: var(--muted);
+        margin: 0.75rem auto 0;
+        max-width: 520px;
+      }
+
+      .footer-heading {
+        font-family: "Cormorant Garamond", "Times New Roman", serif;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+
+      .footer-list {
+        list-style: disc;
+        padding-left: 1.1rem;
+        margin: 0;
+        color: var(--text);
+      }
+
+      .footer-list li + li {
+        margin-top: 0.55rem;
+      }
+
+      .footer-divider {
+        height: 1px;
+        background: var(--border);
+      }
+
+      .footer-column {
+        position: relative;
+      }
+
+      .footer-column + .footer-column {
+        border-left: 1px solid var(--border);
+      }
+
+      .footer-cta {
+        background: #fdf8f5;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 1.25rem;
+        text-align: center;
+        box-shadow: 0 12px 20px rgba(70, 45, 24, 0.1);
+      }
+
+      .btn-whatsapp {
+        background: #f2e6db;
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .btn-whatsapp span {
+        display: block;
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .btn-whatsapp i {
+        font-size: 1.6rem;
+        color: #3c8c5c;
+      }
+
+      .footer-handle {
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .footer-handle::before,
+      .footer-handle::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+
+      .footer-handle span {
+        padding: 0 0.75rem;
+      }
+
+      .footer-social a {
+        width: 42px;
+        height: 42px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-dark);
+        background: #fdf8f5;
+      }
+
+      .footer-social i {
+        font-size: 1.2rem;
+      }
+
+      .footer-copy {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
       @media (max-width: 991px) {
         .form-card {
           padding: 1.5rem !important;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .footer-column + .footer-column {
+          border-left: 0;
+          border-top: 1px solid var(--border);
+          padding-top: 1.5rem;
         }
       }
     </style>
@@ -395,19 +536,76 @@
             </div>
           </form>
 
-          <div class="text-center mt-5">
-            <div class="social-icons d-flex justify-content-center gap-4 mb-3">
-              <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
-              <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+        </div>
+
+        <footer class="site-footer">
+          <div class="footer-panel px-3 px-lg-4 py-4">
+            <div class="text-center">
+              <h2 class="heading footer-brand mb-1">JEGLIDE</h2>
+              <div class="footer-brand-sub text-uppercase">COUTURE</div>
+              <p class="footer-tagline">
+                Özel geceler için tasarlanan zamansız silüetler.
+              </p>
             </div>
-            <div class="secure-note">
+
+            <div class="footer-divider my-4"></div>
+
+            <div class="row g-4 align-items-start">
+              <div class="col-12 col-md-4 footer-column">
+                <h3 class="footer-heading">Koleksiyonlar</h3>
+                <ul class="footer-list">
+                  <li>Davet &amp; Gece</li>
+                  <li>Mezuniyet</li>
+                  <li>Nikah &amp; After Party</li>
+                  <li>Büyük Beden</li>
+                  <li>Yeni Gelenler</li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-4 footer-column">
+                <h3 class="footer-heading">Müşteri Hizmetleri</h3>
+                <ul class="footer-list">
+                  <li>Sipariş Takibi</li>
+                  <li>Kargo &amp; Teslimat</li>
+                  <li>İade &amp; Değişim</li>
+                  <li>Beden Rehberi</li>
+                  <li>S.S.S.</li>
+                </ul>
+              </div>
+              <div class="col-12 col-md-4 footer-column">
+                <div class="footer-cta">
+                  <a href="#" class="btn-whatsapp w-100 text-decoration-none">
+                    <i class="bi bi-whatsapp"></i>
+                    <div>
+                      WhatsApp ile
+                      <span>Stil Danışmanlığı</span>
+                    </div>
+                  </a>
+                </div>
+                <div class="footer-handle d-flex align-items-center gap-2 my-3">
+                  <span>@jeglidecouture</span>
+                </div>
+                <div class="footer-social d-flex justify-content-center gap-3">
+                  <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                  <a href="#" aria-label="Pinterest"><i class="bi bi-pinterest"></i></a>
+                  <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer-divider my-4"></div>
+
+            <div class="text-center secure-note">
               <i class="bi bi-shield-lock me-2"></i>
               GÜVENLİ ALIŞVERİŞ
               <strong>VISA</strong>
             </div>
+            <div class="text-center footer-copy mt-3">
+              &copy; Jeglide Couture - 2026
+              <br />
+              Tüm hakları saklıdır.
+            </div>
           </div>
-        </div>
+        </footer>
       </main>
     </div>
 
