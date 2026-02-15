@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jeglide Couture - Lüks Abiye Koleksiyonu</title>
+  
+  <!-- Bootstrap 5.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ==================== HEADER / NAVBAR ==================== -->
+  <nav class="navbar navbar-expand-lg navbar-jeglide">
+    <div class="container">
+      <!-- Mobil: Hamburger -->
+      <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+        <span class="navbar-toggler-icon"></span>
+        <small class="d-block" style="font-size:9px; color:var(--text-medium);">menü</small>
+      </button>
+
+      <!-- Logo -->
+      <a class="navbar-brand navbar-brand-logo mx-auto mx-lg-0" href="index.html">
+        JEGLIDE
+        <small>COUTURE</small>
+      </a>
+
+      <!-- Masaüstü: Navigasyon -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Anasayfa</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Koleksiyonlar</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Davet &amp; Gece</a></li>
+              <li><a class="dropdown-item" href="#">Mezuniyet</a></li>
+              <li><a class="dropdown-item" href="#">Nikah &amp; After Party</a></li>
+              <li><a class="dropdown-item" href="#">Büyük Beden</a></li>
+              <li><a class="dropdown-item" href="#">Yeni Gelenler</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="iletisim.html">İletişim</a></li>
+          <li class="nav-item"><a class="nav-link" href="uyelik.html">Üyelik</a></li>
+        </ul>
+      </div>
+
+      <!-- Sağ İkonlar -->
+      <div class="navbar-icons d-flex align-items-center">
+        <a href="#" title="Hesabım"><i class="bi bi-person"></i></a>
+        <a href="#" title="Sepetim" data-bs-toggle="modal" data-bs-target="#cartModal">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" id="cartBadge">2</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobil Menü (Offcanvas) -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header" style="background: var(--cream-dark); border-bottom: var(--border-gold);">
+      <h5 class="offcanvas-title fw-playfair">JEGLIDE <span class="text-gold fw-cormorant" style="font-size: 13px;">COUTURE</span></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body" style="background: var(--cream-light);">
+      <ul class="list-unstyled">
+        <li class="mb-3"><a href="index.html" class="fw-500" style="font-size: 15px;">Anasayfa</a></li>
+        <li class="mb-3">
+          <a href="#" style="font-size: 15px;">Koleksiyonlar</a>
+          <ul class="list-unstyled ps-3 mt-2">
+            <li class="mb-2"><a href="#" style="font-size: 13px; color: var(--text-medium);">Davet &amp; Gece</a></li>
+            <li class="mb-2"><a href="#" style="font-size: 13px; color: var(--text-medium);">Mezuniyet</a></li>
+            <li class="mb-2"><a href="#" style="font-size: 13px; color: var(--text-medium);">Nikah &amp; After Party</a></li>
+            <li class="mb-2"><a href="#" style="font-size: 13px; color: var(--text-medium);">Büyük Beden</a></li>
+            <li class="mb-2"><a href="#" style="font-size: 13px; color: var(--text-medium);">Yeni Gelenler</a></li>
+          </ul>
+        </li>
+        <li class="mb-3"><a href="iletisim.html" style="font-size: 15px;">İletişim</a></li>
+        <li class="mb-3"><a href="uyelik.html" style="font-size: 15px;">Üyelik Başvurusu</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== ANA İÇERİK: ÜRÜN DETAY SAYFASI ==================== -->
+  <main class="page-transition">
+
+    <!-- Masaüstünde yan yana düzen -->
+    <div class="container-lg py-lg-4">
+      <div class="row g-lg-4">
+
+        <!-- SOL: Ürün Görselleri (Masaüstü) -->
+        <div class="col-lg-7">
+          <!-- Ürün Görsel Slider -->
+          <section class="product-hero">
+            <div id="productSlider" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#productSlider" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#productSlider" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#productSlider" data-bs-slide-to="2"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <div class="placeholder-img" style="height:550px;">
+                    <span>Ürün Görseli 1</span>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="placeholder-img" style="height:550px;">
+                    <span>Ürün Görseli 2</span>
+                  </div>
+                </div>
+                <div class="carousel-item">
+                  <div class="placeholder-img" style="height:550px;">
+                    <span>Ürün Görseli 3</span>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#productSlider" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#productSlider" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- SAĞ: Ürün Bilgileri -->
+        <div class="col-lg-5">
+          <!-- Ürün Adı, Kodu, Fiyat -->
+          <section class="product-detail-section">
+            <h1 class="product-name">Luna Drapeli Abiye</h1>
+            <p class="product-code">Ürün Kodu: F12345</p>
+            <div class="product-price-box">
+              <span class="price-label">Fiyat</span>
+              <span class="price-value">89 $</span>
+            </div>
+          </section>
+
+          <!-- Renk Seçenekleri -->
+          <section class="color-options-section">
+            <div class="color-carousel-wrapper">
+              <button class="color-nav-btn prev" onclick="scrollColors(-1)"><i class="bi bi-chevron-left"></i></button>
+              <div class="color-carousel" id="colorCarousel">
+                <div class="color-option active">
+                  <div class="placeholder-img" style="width:90px; height:120px; border-radius:10px; border:2px solid var(--gold);">
+                    <small style="font-size:10px;">Zümrüt</small>
+                  </div>
+                  <span>Zümrüt</span>
+                </div>
+                <div class="color-option">
+                  <div class="placeholder-img" style="width:90px; height:120px; border-radius:10px; background:linear-gradient(135deg, #6b1a1a, #8b2a2a);">
+                    <small style="font-size:10px; color:#eee;">Bordo</small>
+                  </div>
+                  <span>Bordo</span>
+                </div>
+                <div class="color-option">
+                  <div class="placeholder-img" style="width:90px; height:120px; border-radius:10px; background:linear-gradient(135deg, #d4b896, #c4a880);">
+                    <small style="font-size:10px;">Cappuccino</small>
+                  </div>
+                  <span>Cappuccino</span>
+                </div>
+                <div class="color-option">
+                  <div class="placeholder-img" style="width:90px; height:120px; border-radius:10px; background:linear-gradient(135deg, #5a7a8a, #4a6a7a);">
+                    <small style="font-size:10px; color:#eee;">Petrol</small>
+                  </div>
+                  <span>Petrol</span>
+                </div>
+                <div class="color-option">
+                  <div class="placeholder-img" style="width:90px; height:120px; border-radius:10px; background:linear-gradient(135deg, #b0c4d0, #a0b4c0);">
+                    <small style="font-size:10px;">Bebe Mavisi</small>
+                  </div>
+                  <span>Bebe Mavisi</span>
+                </div>
+              </div>
+              <button class="color-nav-btn next" onclick="scrollColors(1)"><i class="bi bi-chevron-right"></i></button>
+            </div>
+          </section>
+
+          <!-- Beden Seçimi -->
+          <section class="size-section">
+            <p class="size-section-title">Beden Seçiniz</p>
+            <div class="size-options">
+              <button class="btn-outline-gold size-btn active">38-40-42</button>
+              <button class="btn-outline-gold size-btn">44-46-48</button>
+            </div>
+          </section>
+
+          <!-- Sepete Ekle -->
+          <section class="add-to-cart-section">
+            <button class="btn-gold btn-add-cart" onclick="addToCart()">
+              <i class="bi bi-bag-plus"></i>
+              SEPETE EKLE
+              <i class="bi bi-chevron-down" style="font-size:12px; opacity:0.7;"></i>
+            </button>
+          </section>
+
+          <!-- Ürün Açıklaması -->
+          <section class="product-description-section">
+            <h2 class="description-title">Ürün Açıklaması</h2>
+            <p class="description-text">
+              Bu bölümde abiye elbisenin özellikleri, kumaşı, tasarım detayları yer alır. 
+              Ürün açıklaması bu alanda detaylı şekilde anlatılır.
+              <a href="#" class="read-more-link"> &gt; &gt;&gt;</a>
+            </p>
+          </section>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Benzer Ürünler -->
+    <section class="similar-products-section">
+      <div class="container">
+        <h2 class="section-title">Benzer Davet &amp; Gece Elbiseleri</h2>
+        <div class="row g-3">
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="product-card">
+              <button class="wishlist-btn"><i class="bi bi-heart"></i></button>
+              <div class="placeholder-img product-card-img">Ürün</div>
+              <div class="product-card-body">
+                <h5 class="product-card-title">Elara Abiye</h5>
+                <p class="product-card-price">129 $</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="product-card">
+              <button class="wishlist-btn"><i class="bi bi-heart"></i></button>
+              <div class="placeholder-img product-card-img">Ürün</div>
+              <div class="product-card-body">
+                <h5 class="product-card-title">Sera Drapeli Abiye</h5>
+                <p class="product-card-price">99 $</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="product-card">
+              <button class="wishlist-btn"><i class="bi bi-heart"></i></button>
+              <div class="placeholder-img product-card-img">Ürün</div>
+              <div class="product-card-body">
+                <h5 class="product-card-title">Nova Gece Elbisesi</h5>
+                <p class="product-card-price">149 $</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-3">
+            <div class="product-card">
+              <button class="wishlist-btn"><i class="bi bi-heart"></i></button>
+              <div class="placeholder-img product-card-img">Ürün</div>
+              <div class="product-card-body">
+                <h5 class="product-card-title">Bella Straplez Abiye</h5>
+                <p class="product-card-price">109 $</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider-ornament">
+      <span>◇</span>
+    </div>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer-jeglide">
+    <div class="container">
+      <!-- Logo & Tagline -->
+      <div class="footer-logo">
+        JEGLIDE
+        <small>COUTURE</small>
+      </div>
+      <p class="footer-tagline">Özel geceler için tasarlanan zamansız silüetler.</p>
+
+      <!-- Footer Kolonlar -->
+      <div class="footer-columns">
+        <div class="row g-4">
+          <!-- Koleksiyonlar -->
+          <div class="col-sm-4">
+            <h4 class="footer-col-title">Koleksiyonlar</h4>
+            <ul class="footer-links">
+              <li><a href="#">Davet &amp; Gece</a></li>
+              <li><a href="#">Mezuniyet</a></li>
+              <li><a href="#">Nikah &amp; After Party</a></li>
+              <li><a href="#">Büyük Beden</a></li>
+              <li><a href="#">Yeni Gelenler</a></li>
+            </ul>
+          </div>
+          <!-- Müşteri Hizmetleri -->
+          <div class="col-sm-4">
+            <h4 class="footer-col-title">Müşteri Hizmetleri</h4>
+            <ul class="footer-service-links">
+              <li><a href="#">Sipariş Takibi</a></li>
+              <li><a href="#">Kargo &amp; Teslimat</a></li>
+              <li><a href="#">İade &amp; Değişim</a></li>
+              <li><a href="#">Beden Rehberi</a></li>
+              <li><a href="#">S.S.S.</a></li>
+            </ul>
+          </div>
+          <!-- İletişim & Sosyal Medya -->
+          <div class="col-sm-4 text-center text-sm-end">
+            <a href="https://wa.me/905555555555" class="whatsapp-box d-inline-flex text-decoration-none">
+              <i class="fab fa-whatsapp"></i>
+              <div class="text-start">
+                <div class="wp-title">WhatsApp ile</div>
+                <div class="wp-subtitle">Stil Danışmanlığı</div>
+              </div>
+            </a>
+            <div class="footer-social-handle">@jeglidecouture</div>
+            <div class="footer-social-icons">
+              <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" title="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+              <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Güvenli Alışveriş -->
+      <div class="footer-trust">
+        <i class="bi bi-shield-lock-fill"></i>
+        <span>GÜVENLİ ALIŞVERİŞ</span>
+        <span class="visa-text">VISA</span>
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer-copyright">
+        &copy; <strong>Jeglide Couture</strong> &ndash; 2026 &mdash; Tüm hakları saklıdır.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SEPET MODAL ==================== -->
+  <div class="modal fade cart-modal" id="cartModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <!-- Başlık -->
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" style="font-size:10px;"></button>
+          <h5 class="modal-title mx-auto">Alışveriş Sepetim</h5>
+          <a href="#" class="text-decoration-none" data-bs-dismiss="modal" style="font-size:13px; color:var(--text-medium);">Kapat</a>
+        </div>
+
+        <!-- Sepet İçeriği -->
+        <div class="modal-body" id="cartBody">
+          <!-- Ürün 1 -->
+          <div class="cart-item">
+            <div class="placeholder-img cart-item-img" style="background:#d4c4b0;">
+              <small style="font-size:9px;">J21099</small>
+            </div>
+            <div class="cart-item-info">
+              <div class="cart-item-code">J21099</div>
+              <div class="cart-item-detail">adet fiyatı 1.274,15 ₺</div>
+              <div class="cart-item-price">1.274,15 ₺</div>
+            </div>
+            <div class="qty-control">
+              <button onclick="updateQty(this, -1)">−</button>
+              <span>1</span>
+              <button onclick="updateQty(this, 1)">+</button>
+            </div>
+            <button class="cart-delete-btn" onclick="removeCartItem(this)"><i class="bi bi-trash3"></i></button>
+          </div>
+
+          <!-- Ürün 2 -->
+          <div class="cart-item">
+            <div class="placeholder-img cart-item-img" style="background:#c8d0c0; border-radius:50%;">
+              <small style="font-size:9px;">J25036</small>
+            </div>
+            <div class="cart-item-info">
+              <div class="cart-item-code">J25036</div>
+              <div class="cart-item-detail">44-46-48 - çağla / adet fiyatı 80,75 $</div>
+              <div class="cart-item-price">80,75 ₺</div>
+            </div>
+            <div class="qty-control">
+              <button onclick="updateQty(this, -1)">−</button>
+              <span>1</span>
+              <button onclick="updateQty(this, 1)">+</button>
+            </div>
+            <button class="cart-delete-btn" onclick="removeCartItem(this)"><i class="bi bi-trash3"></i></button>
+          </div>
+        </div>
+
+        <!-- Toplam -->
+        <div class="cart-total-bar">
+          <span class="cart-total-label">Toplam:</span>
+          <span class="cart-total-price">1.354,90 <small>TL</small></span>
+        </div>
+
+        <!-- Butonlar -->
+        <div class="cart-actions">
+          <button class="btn-outline-gold" data-bs-dismiss="modal">Sepete Git</button>
+          <button class="btn-gold" onclick="window.location.href='siparis-onay.html'">Siparişi Tamamla</button>
+        </div>
+
+        <!-- Önerilen Ürün -->
+        <div class="cart-suggestion">
+          <div class="placeholder-img cart-suggestion-img" style="background:#2a2a5a;">
+            <small style="font-size:9px; color:#aaa;">J19810</small>
+          </div>
+          <div class="cart-suggestion-info">
+            <div class="code">J19810</div>
+            <div>
+              <span class="old-price">999,00 ₺</span>
+              <span class="new-price">&gt; 649,00 TL</span>
+            </div>
+            <button class="btn-gold mt-2" style="padding: 6px 20px; font-size: 11px;">Sepete Ekle</button>
+          </div>
+        </div>
+
+        <!-- Alttaki toplam -->
+        <div class="text-center py-2" style="font-size:13px; color:var(--text-medium); border-top: 1px solid rgba(184,150,94,0.1);">
+          Toplam: <strong>1.354,90 TL</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MOBİL ALT NAVİGASYON ==================== -->
+  <nav class="bottom-nav d-lg-none">
+    <a href="index.html" class="bottom-nav-item active">
+      <i class="bi bi-house-fill"></i>
+      <span>Anasayfa</span>
+    </a>
+    <a href="#" class="bottom-nav-item">
+      <i class="bi bi-person"></i>
+      <span>Hesabım</span>
+    </a>
+    <a href="#" class="bottom-nav-item" data-bs-toggle="modal" data-bs-target="#cartModal">
+      <i class="bi bi-bag"></i>
+      <span class="badge-dot">2</span>
+      <span>Sepetim</span>
+    </a>
+    <a href="#" class="bottom-nav-item">
+      <i class="bi bi-truck"></i>
+      <span>Sipariş Takibi</span>
+    </a>
+    <a href="iletisim.html" class="bottom-nav-item">
+      <i class="bi bi-telephone"></i>
+      <span>İletişim</span>
+    </a>
+  </nav>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
